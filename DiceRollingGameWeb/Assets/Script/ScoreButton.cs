@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AddScoreButton : MonoBehaviour, InterfaceDataPersistance
+public class ScoreButton : MonoBehaviour, InterfaceDataPersistance
 {
     [SerializeField] private TextMeshProUGUI scoreText;
 
@@ -27,7 +27,6 @@ public class AddScoreButton : MonoBehaviour, InterfaceDataPersistance
     {
         scoreText.text = score + "";
     }
-
 
     public void LoadData(PlayerData data)
     {
