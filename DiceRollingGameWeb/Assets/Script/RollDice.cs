@@ -15,6 +15,7 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
     int currentScore = 0;
     int die;
     int diceRolledCount = 0;
+    int reRollCount = 10;
 
     enum AddScoreCondtion { twoDice, threeDice, straightDice, none };
     [SerializeField] private AddScoreCondtion asc;

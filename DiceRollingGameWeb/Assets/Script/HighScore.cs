@@ -6,10 +6,17 @@ using TMPro;
 public class HighScore : MonoBehaviour
 {
 
+    private class HighScoreEntry
+    {
+        public int score;
+        public string name;
+    }
+
+
     private Transform entryContainer;
     private Transform entryTemplate;
 
-    private List<HighScoreEntry> highScoreEntriesList;
+    private List<HighScoreEntry> highScoreEntryList;
     private List<Transform> highScoreEntryTransformList;
     private void Awake()
     {
@@ -18,7 +25,7 @@ public class HighScore : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
-        highScoreEntriesList = new List<HighScoreEntry>()
+        highScoreEntryList = new List<HighScoreEntry>()
         {
             new HighScoreEntry{ score = 1234, name = "MZ"},
             new HighScoreEntry{ score = 123, name = "asd"},
@@ -26,18 +33,30 @@ public class HighScore : MonoBehaviour
             new HighScoreEntry{ score = 45, name = "sd"}
         };
 
+        // Sort entry list by Score
+        for (int i = 0; i < highScoreEntryList.Count; i++)
+        {
+            for (int j = i + 1; j < highScoreEntryList.Count; j++)
+            {
+                if (highScoreEntryList[j].score > highScoreEntryList[i].score)
+                {
+                    // Swap
+                    HighScoreEntry temp = highScoreEntryList[i];
+                    highScoreEntryList[i] = highScoreEntryList[j];
+                    highScoreEntryList[j] = temp;
+                }
+            }
+        }
+
+
         highScoreEntryTransformList = new List<Transform>();
-        foreach (HighScoreEntry highscoreEntry in highScoreEntriesList)
+        foreach (HighScoreEntry highscoreEntry in highScoreEntryList)
         {
             CreateHighStoreEntryTransform(highscoreEntry, entryContainer, highScoreEntryTransformList);
         }
     }
 
-    private class HighScoreEntry
-    {
-        public int score;
-        public string name;
-    }
+ 
     private void CreateHighStoreEntryTransform(HighScoreEntry highScoreEntry, Transform container, List<Transform> transformList)
     {
         float templateHeight = 40f;
