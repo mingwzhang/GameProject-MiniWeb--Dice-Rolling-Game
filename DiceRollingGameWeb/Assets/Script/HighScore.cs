@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class HighScore : MonoBehaviour
+public class HighScore : MonoBehaviour, InterfaceDataPersistance
 {
 
     private class HighScoreEntry
@@ -18,6 +18,7 @@ public class HighScore : MonoBehaviour
     private List<HighScoreEntry> highScoreEntryList;
     private List<Transform> highScoreEntryTransformList;
 
+    [SerializeField] private RollDice rd;
 
     private void Awake()
     {
@@ -26,9 +27,14 @@ public class HighScore : MonoBehaviour
 
         entryTemplate.gameObject.SetActive(false);
 
+        highScoreEntryTransformList = new List<Transform>();
+    }
+
+    private void CreateHighScore()
+    {
         highScoreEntryList = new List<HighScoreEntry>()
         {
-            new HighScoreEntry{ score = 1234, name = "MZ"},
+            new HighScoreEntry{ score = rd.TotalScore(), name = PlayerPrefs.GetString("Player Name")},
         };
 
         // Sort entry list by Score
@@ -38,7 +44,6 @@ public class HighScore : MonoBehaviour
             {
                 if (highScoreEntryList[j].score > highScoreEntryList[i].score)
                 {
-                    // Swap
                     HighScoreEntry temp = highScoreEntryList[i];
                     highScoreEntryList[i] = highScoreEntryList[j];
                     highScoreEntryList[j] = temp;
@@ -46,15 +51,12 @@ public class HighScore : MonoBehaviour
             }
         }
 
-
-        highScoreEntryTransformList = new List<Transform>();
         foreach (HighScoreEntry highscoreEntry in highScoreEntryList)
         {
             CreateHighStoreEntryTransform(highscoreEntry, entryContainer, highScoreEntryTransformList);
         }
     }
 
- 
     private void CreateHighStoreEntryTransform(HighScoreEntry highScoreEntry, Transform container, List<Transform> transformList)
     {
         float templateHeight = 40f;
@@ -91,5 +93,19 @@ public class HighScore : MonoBehaviour
         entryTransform.Find("Name pos").GetComponent<Text>().text = name.ToString();
 
         transformList.Add(entryTransform);
+    }
+
+
+    public void LoadData(PlayerData data)
+    {
+        this.name = data.playerName;
+        Debug.Log("Load");
+    }
+
+    public void SaveData(ref PlayerData data)
+    {
+        data.playerName = this.name;
+        Debug.Log("Save");
+
     }
 }

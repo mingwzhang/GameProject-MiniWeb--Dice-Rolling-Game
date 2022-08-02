@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class RollDice : MonoBehaviour, InterfaceDataPersistance
+public class RollDice : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -18,7 +18,7 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
     int die;
     int diceRolledCount = 0;
     int rerollCount = 10;
-
+    int totalScore = 0;
     enum AddScoreCondtion { twoDice, threeDice, straightDice, none };
     [SerializeField] private AddScoreCondtion asc;
     [SerializeField] private GameObject restartButton;
@@ -155,19 +155,11 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
             gameOverText.SetActive(true);
             restartButton.SetActive(false);
             rollButton.SetActive(false);
+            totalScore = currentScore;
         }
     }
-
-    public void LoadData(PlayerData data)
+    public int TotalScore()
     {
-        this.currentScore = data.scores;
-        Debug.Log("Load");
-    }
-
-    public void SaveData(ref PlayerData data)
-    {
-        data.scores = this.currentScore;
-        Debug.Log("Save");
-
+        return totalScore;
     }
 }
