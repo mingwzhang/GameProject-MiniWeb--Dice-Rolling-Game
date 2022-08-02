@@ -6212,13 +6212,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Dice Game Rules:\r\n\r\n- Roll 3 dice until Reroll reached  0\r\n- Each
-    time the 3 dice are rolled, player will gain score if the result of  the dice
-    value form pattern.\r\n- Every 3 Rolls uses 1 Reroll\r\n- Player with the highest
-    score wins\r\n\r\n\r\n- Dice Patterns: \r\n1. Straight (123, 234, 654, etc.):
-    +500 Points\r\n2. Double (221, 466, 151, etc.): +200 Points, +1 Reroll\r\n3.
-    Triple  (333, 444, 666, etc.): +300 Points, +2 Reroll\r\n4. Anything else: +0
-    Points\r\n\n"
+  m_text: "- Roll 3 dice until Reroll reached  0\r\n- Each time the 3 dice are rolled,
+    player will gain score if the result of  the dice value form pattern.\r\n- Every
+    3 Rolls uses 1 Reroll\r\n- Player with the highest score wins\r\n\r\n\r\nDice
+    Patterns: \r\n1. Straight (123, 234, 654, etc.): +500 Points\r\n2. Double (221,
+    466, 151, etc.): +200 Points, +1 Reroll\r\n3. Triple  (333, 444, 666, etc.):
+    +300 Points, +2 Reroll\r\n4. Anything else: +0 Points\r\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
