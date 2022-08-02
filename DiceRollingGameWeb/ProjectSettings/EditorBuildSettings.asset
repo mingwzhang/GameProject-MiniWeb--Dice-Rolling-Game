@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/HomeScreen.unity
+    path: Assets/Scenes/TitleScreen.unity
     guid: 071b126c2b36ea6479e29f0bf9ce263a
   - enabled: 1
     path: Assets/Scenes/DiceRollingGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/HighScore.unity
+    guid: 199a93d1e5dbb014ab62ab2d16c0a300
   m_configObjects: {}

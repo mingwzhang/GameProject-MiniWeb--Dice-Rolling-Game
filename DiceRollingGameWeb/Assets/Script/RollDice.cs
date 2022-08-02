@@ -9,16 +9,18 @@ public class RollDice : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI rerollValueText;
+    [SerializeField] private TextMeshProUGUI playerNameText;
 
     [SerializeField] private TextMeshProUGUI[] dieResult = new TextMeshProUGUI[3];  //Intent to display result for individual die
     [SerializeField] private TMP_InputField cheatInput; //Intent to allow the player to manually enter each dice number
 
     private int[] diceMatching = new int[3];  // Intent to set up different condition after three dice are rolled
-    int currentScore = 0;
+    public int currentScore = 0;
     int die;
     int diceRolledCount = 0;
-    int rerollCount = 10;
-    int totalScore = 0;
+    int rerollCount = 5;
+
+    bool gameOver = false;
     enum AddScoreCondtion { twoDice, threeDice, straightDice, none };
     [SerializeField] private AddScoreCondtion asc;
     [SerializeField] private GameObject restartButton;
@@ -30,6 +32,7 @@ public class RollDice : MonoBehaviour
     [SerializeField] private GameObject straightPtText;
     [SerializeField] private GameObject reroll1Text;
     [SerializeField] private GameObject reroll2Text;
+    [SerializeField] private GameObject highScoreButton;
 
     private void Start()
     {
@@ -78,12 +81,9 @@ public class RollDice : MonoBehaviour
         reroll2Text.SetActive(false);
     }
 
-    public void MainMenuButton()
-    {
-        SceneManager.LoadScene("HomeScreen");
-    }
+ 
 
-    private int ScoreDistribution()
+    public int ScoreDistribution()
     {
         int addScore = 0;
         if (diceMatching[0] == 1 || diceMatching[0] == 2)   //Add 100 score if the dice pattern is 123, 234
@@ -141,25 +141,36 @@ public class RollDice : MonoBehaviour
 
     private void DisplayScore()
     {
-        if (diceRolledCount >= 3)
+        if (rerollCount <= 0 && gameOver == false) // When game is over
+        {
+            gameOverText.SetActive(true);
+            highScoreButton.SetActive(true);
+            restartButton.SetActive(false);
+            rollButton.SetActive(false);
+            gameOver = true;
+            PlayerPrefs.SetInt("TotalScore", currentScore);
+        }
+
+
+        if (diceRolledCount >= 3) //When you can still reroll
         {
             currentScore += ScoreDistribution();
             diceRolledCount = 0;
             restartButton.SetActive(true);
         }
+
+        playerNameText.text = PlayerPrefs.GetString("PlayerName");
         scoreText.text = currentScore.ToString();
         rerollValueText.text = rerollCount.ToString();
-
-        if (rerollCount <= 0)
-        {
-            gameOverText.SetActive(true);
-            restartButton.SetActive(false);
-            rollButton.SetActive(false);
-            totalScore = currentScore;
-        }
     }
-    public int TotalScore()
+
+    public void TitleScreenButton()
     {
-        return totalScore;
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void HighScoreButton()
+    {
+        SceneManager.LoadScene("HighScore");
     }
 }

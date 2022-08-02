@@ -14,7 +14,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using CodeMonkey.Utils;
 
 public class HighscoreTable : MonoBehaviour {
 
@@ -100,22 +99,6 @@ public class HighscoreTable : MonoBehaviour {
             entryTransform.Find("nameText").GetComponent<Text>().color = Color.green;
         }
 
-        // Set tropy
-        switch (rank) {
-        default:
-  //          entryTransform.Find("trophy").gameObject.SetActive(false);
-            break;
-        case 1:
- //           entryTransform.Find("trophy").GetComponent<Image>().color = UtilsClass.GetColorFromString("FFD200");
-            break;
-        case 2:
-  //          entryTransform.Find("trophy").GetComponent<Image>().color = UtilsClass.GetColorFromString("C6C6C6");
-            break;
-        case 3:
-  //          entryTransform.Find("trophy").GetComponent<Image>().color = UtilsClass.GetColorFromString("B76F56");
-            break;
-
-        }
 
         transformList.Add(entryTransform);
     }

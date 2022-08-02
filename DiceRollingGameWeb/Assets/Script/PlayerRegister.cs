@@ -10,14 +10,13 @@ public class PlayerRegister : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
     }
 
 
     public void StartGame()
     {
 
-        PlayerPrefs.SetString("Player Name", playerName.text);
+        PlayerPrefs.SetString("PlayerName", playerName.text);
         SceneManager.LoadScene("DiceRollingGame");
     }
 }
