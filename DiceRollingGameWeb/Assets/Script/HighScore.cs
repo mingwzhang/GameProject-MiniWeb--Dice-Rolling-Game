@@ -15,9 +15,10 @@ public class HighScore : MonoBehaviour
 
     private Transform entryContainer;
     private Transform entryTemplate;
-
     private List<HighScoreEntry> highScoreEntryList;
     private List<Transform> highScoreEntryTransformList;
+
+
     private void Awake()
     {
         entryContainer = transform.Find("Score Container");
@@ -28,9 +29,6 @@ public class HighScore : MonoBehaviour
         highScoreEntryList = new List<HighScoreEntry>()
         {
             new HighScoreEntry{ score = 1234, name = "MZ"},
-            new HighScoreEntry{ score = 123, name = "asd"},
-            new HighScoreEntry{ score = 432, name = "sfd"},
-            new HighScoreEntry{ score = 45, name = "sd"}
         };
 
         // Sort entry list by Score

@@ -8,6 +8,8 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
 {
 
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI rerollValueText;
+
     [SerializeField] private TextMeshProUGUI[] dieResult = new TextMeshProUGUI[3];  //Intent to display result for individual die
     [SerializeField] private TMP_InputField cheatInput; //Intent to allow the player to manually enter each dice number
 
@@ -15,17 +17,25 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
     int currentScore = 0;
     int die;
     int diceRolledCount = 0;
-    int reRollCount = 10;
+    int rerollCount = 10;
 
     enum AddScoreCondtion { twoDice, threeDice, straightDice, none };
     [SerializeField] private AddScoreCondtion asc;
     [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject rollButton;
+    [SerializeField] private GameObject gameOverText;
+
+    [SerializeField] private GameObject triplePtText;
+    [SerializeField] private GameObject doublePtText;
+    [SerializeField] private GameObject straightPtText;
+    [SerializeField] private GameObject reroll1Text;
+    [SerializeField] private GameObject reroll2Text;
 
     private void Start()
     {
         for (int x = 0; x < dieResult.Length; x++)
         {
-            dieResult[x].text = "???";
+            dieResult[x].text = "?";
         }
         asc = AddScoreCondtion.none;
     }
@@ -53,15 +63,25 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
             diceRolledCount++;
         }
     }
-    public void Retry()
+    public void NextRoll()
     {
         for (int x = 0; x < dieResult.Length; x++)
         {
-            dieResult[x].text = "???";
+            dieResult[x].text = "?";
         }
         asc = AddScoreCondtion.none;
+        rerollCount--;
+        triplePtText.SetActive(false);
+        doublePtText.SetActive(false);
+        straightPtText.SetActive(false);
+        reroll1Text.SetActive(false);
+        reroll2Text.SetActive(false);
     }
 
+    public void MainMenuButton()
+    {
+        SceneManager.LoadScene("HomeScreen");
+    }
 
     private int ScoreDistribution()
     {
@@ -98,17 +118,19 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
         {
             case AddScoreCondtion.straightDice:
                 addScore += 500;
-                Debug.Log("straight dice");
-
+                straightPtText.SetActive(true);
                 break;
             case AddScoreCondtion.twoDice:
                 addScore += 200;
-                Debug.Log("double dice");
+                doublePtText.SetActive(true);
+                reroll1Text.SetActive(true);
+                rerollCount++;
                 break;
             case AddScoreCondtion.threeDice:
                 addScore += 300;
-                Debug.Log("tripple dice");
-
+                rerollCount = rerollCount + 2;
+                triplePtText.SetActive(true);
+                reroll2Text.SetActive(true);
                 break;
             default:
                 addScore += 0;
@@ -126,6 +148,14 @@ public class RollDice : MonoBehaviour, InterfaceDataPersistance
             restartButton.SetActive(true);
         }
         scoreText.text = currentScore.ToString();
+        rerollValueText.text = rerollCount.ToString();
+
+        if (rerollCount <= 0)
+        {
+            gameOverText.SetActive(true);
+            restartButton.SetActive(false);
+            rollButton.SetActive(false);
+        }
     }
 
     public void LoadData(PlayerData data)
