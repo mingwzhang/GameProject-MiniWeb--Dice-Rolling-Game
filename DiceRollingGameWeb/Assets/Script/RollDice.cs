@@ -34,6 +34,7 @@ public class RollDice : MonoBehaviour
     [SerializeField] private GameObject reroll2Text;
     [SerializeField] private GameObject highScoreButton;
 
+
     private void Start()
     {
         for (int x = 0; x < dieResult.Length; x++)
@@ -171,6 +172,11 @@ public class RollDice : MonoBehaviour
 
     public void HighScoreButton()
     {
+ 
         SceneManager.LoadScene("HighScore");
+
     }
+
+
+
 }

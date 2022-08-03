@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HighScores : MonoBehaviour
 {
-    const string privateCode = "e0Xn9hWkQEy6RITO0PPv0ALjGmd-ZE8Eiy9TpbmcrKcA";  //Key to Upload New Info
-    const string publicCode = "62e99f7b8f40bf84ec964902";   //Key to download
+    const string privateCode = "2JoRfngGm06JFh0DdjYoUAnhSGhsES30K9NPYzKfvjXQ";  //Key to Upload New Info
+    const string publicCode = "62e9d7738f40bf84ec967b33";   //Key to download
     const string webURL = "http://dreamlo.com/lb/"; //  Website the keys are for
 
     public PlayerScore[] scoreList;
