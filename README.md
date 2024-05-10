@@ -3,7 +3,8 @@
 
 HOW TO PLAY
 - Roll 3 dice until Reroll reached O
-- Player will gain score if the result of the dice value forms a pattern - Every 3 Rolls uses 1 Reroll
+- Player will gain score if the result of the dice value forms a pattern
+- Every 3 Rolls uses 1 Reroll
 - Player with the highest score wins
 
 Dice Patterns:
